@@ -1,0 +1,28 @@
+{
+  "name": "Anilist updater",
+  "description": "Met à jour automatiquement Anilist avec les animés regardés sur Crunchyroll et v6.voiranime.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "notifications",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.crunchyroll.com/*",
+    "https://v6.voiranime.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  }
+}

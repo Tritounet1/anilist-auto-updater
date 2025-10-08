@@ -49,7 +49,7 @@ chrome.runtime.onMessage.addListener(async(message, sender) => {
         if (settings.showNotifications) {
           chrome.notifications.create({
             type: "basic",
-            iconUrl: "icon.png",
+            iconUrl: "../assets/icons/icon.png",
             title: "Update ✨",
             message: `Anilist mis à jour automatiquement !\n${animeTitle} - ${episode} / ${anime.episodes}`
           });
@@ -59,7 +59,7 @@ chrome.runtime.onMessage.addListener(async(message, sender) => {
         if (settings.showNotifications) {
           chrome.notifications.create({
             type: "basic",
-            iconUrl: "icon.png",
+            iconUrl: "../assets/icons/icon.png",
             title: "Erreur ❌",
             message: "Impossible de mettre à jour Anilist automatiquement"
           });
@@ -78,7 +78,7 @@ chrome.runtime.onMessage.addListener(async(message, sender) => {
 
       // Ouvrir une popup de confirmation
       chrome.windows.create({
-        url: chrome.runtime.getURL('confirm.html'),
+        url: chrome.runtime.getURL('ui/confirm.html'),
         type: 'popup',
         width: 450,
         height: 280,
@@ -109,7 +109,7 @@ chrome.runtime.onMessage.addListener(async(message, sender) => {
           if (settings.showNotifications) {
             chrome.notifications.create({
               type: "basic",
-              iconUrl: "icon.png",
+              iconUrl: "../assets/icons/icon.png",
               title: "Update ✨",
               message: `Anilist mis à jour !\n${pendingData.animeTitle} - ${pendingData.episode} / ${pendingData.totalEpisodes}`
             });
@@ -123,7 +123,7 @@ chrome.runtime.onMessage.addListener(async(message, sender) => {
       console.error("Erreur lors de la mise à jour :", error);
       chrome.notifications.create({
         type: "basic",
-        iconUrl: "icon.png",
+        iconUrl: "../assets/icons/icon.png",
         title: "Erreur ❌",
         message: "Impossible de mettre à jour Anilist"
       });

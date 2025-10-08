@@ -59,6 +59,35 @@ Clonez ou téléchargez ce repository sur votre ordinateur.
    - **Mode automatique** : Mise à jour immédiate sur Anilist
    - **Mode confirmation** : Popup pour valider la mise à jour
 
+## Structure du projet
+
+```
+  anilist-updater/
+  ├── 📄 manifest.json          # Configuration principale
+  ├── 📄 README.md
+  ├── 📄 .gitignore
+  │
+  ├── 📁 src/                   # Code source principal
+  │   ├── 📄 background.js      # Service worker
+  │   ├── 📄 content.js         # Script injecté
+  │   └── 📄 anilist-fetch.js   # API Anilist
+  │
+  ├── 📁 ui/                    # Interfaces utilisateur
+  │   ├── 📄 popup.html         # Popup principale
+  │   ├── 📄 popup.js
+  │   ├── 📄 options.html       # Page d'options
+  │   ├── 📄 options.js
+  │   ├── 📄 confirm.html       # Popup de confirmation
+  │   └── 📄 confirm.js
+  │
+  └── 📁 assets/                # Ressources statiques
+      └── 📁 icons/
+          ├── 📄 icon-16.png    # 16x16px
+          ├── 📄 icon-48.png    # 48x48px
+          ├── 📄 icon-128.png   # 128x128px
+          └── 📄 icon-512.png   # 512x512px (store)
+```
+
 ## Permissions requises
 
 L'extension demande les permissions suivantes :
@@ -73,6 +102,6 @@ L'extension demande les permissions suivantes :
 - [ ] Modifier les commentaires dans le code (les faires en anglais + les améliorés et en rajouter)
 - [ ] Modifié l'icon de l'extension (et la mettre partout pour tout les emplacements d'icones, exemple : dans la liste des extensions)
 - [ ] Interface d'authentification Anilist intégrée (Enlever le dossir script quand la page d'authentifcation est intégrer)
-- [ ] Améliorer la documentation (emojis pour stylisé, des screens pour l'installation et le fonctionnement, ...)
 - [ ] Statistiques de visionnage (avoir directement dans les options de l'extension les infos de son compte anylist)
+- [ ] Rendre l'extension compatible firefox
 - [ ] Support de sites additionnels (MyAnimeList, etc.)

@@ -16,22 +16,22 @@
     "https://v6.voiranime.com/*"
   ],
   "background": {
-    "service_worker": "background.js",
+    "service_worker": "src/background.js",
     "type": "module"
   },
   "web_accessible_resources": [
     {
-      "resources": ["script/tokens.json", "confirm.html", "confirm.js"],
+      "resources": ["script/tokens.json", "ui/confirm.html", "ui/confirm.js"],
       "matches": ["<all_urls>"]
     }
   ],
-  "options_page": "options.html",
+  "options_page": "ui/options.html",
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "ui/popup.html",
     "default_icon": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
+      "16": "assets/icons/icon.png",
+      "48": "assets/icons/icon.png",
+      "128": "assets/icons/icon.png"
     }
   },
   "content_scripts": [
@@ -41,7 +41,7 @@
         "https://*.crunchyroll.com/*",
         "https://v6.voiranime.com/*"
       ],
-      "js": ["content.js"],
+      "js": ["src/content.js"],
       "run_at": "document_idle"
     }
   ]

@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Site Checker</title>
-  </head>
-  <body>
-    <h3>Extension active ✅</h3>
-    <p>Elle vérifie vos visites en arrière-plan.</p>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 300px; padding: 20px; }
+    button { padding: 10px; margin: 5px 0; width: 100%; }
+    #status { margin: 10px 0; padding: 10px; border-radius: 5px; }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+  <h3>Anilist Updater</h3>
+  <div id="status"></div>
+  <button id="login">Se connecter à Anilist</button>
+  <button id="test">Tester la connexion</button>
+  <script src="popup.js"></script>
+</body>
 </html>

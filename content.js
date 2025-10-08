@@ -11,16 +11,20 @@ function extractAndSend() {
   // si c'est voiranime
   // a faire
 
-  console.log("Debug - h1:", h1, "animeTitle:", animeTitle);
+  // console.log("Debug - h1:", h1, "animeTitle:", animeTitle);
 
-  const episodeTitle = h1;
   const seriesTitle = animeTitle || h4;
 
-  if (episodeTitle && seriesTitle) {
+  if (h1 && seriesTitle) {
+
+    const [episodeNb, episodeTitle] = h1.split(" - ")
+
+    const episode = parseInt(episodeNb.replace("E", ""), 10);
+
     chrome.runtime.sendMessage({
-      type: "PAGE_INFO",
-      title: episodeTitle,
-      subtitle: seriesTitle
+      type: "PAGE_INFO",   
+      animeTitle: seriesTitle,
+      episode: episode  
     });
     return true; // trouvé
   }

@@ -8,15 +8,24 @@
     "storage",
     "webNavigation",
     "notifications",
-    "scripting"
+    "scripting",
+    "identity"
   ],
   "host_permissions": [
     "https://*.crunchyroll.com/*",
     "https://v6.voiranime.com/*"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["script/tokens.json", "confirm.html", "confirm.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "options_page": "options.html",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

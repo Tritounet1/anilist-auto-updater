@@ -1,6 +1,6 @@
 const API_URL = "https://graphql.anilist.co";
 
-// 1️⃣ Charger les tokens depuis le fichier tokens.json
+// 1️Charger les tokens depuis le fichier tokens.json
 async function loadTokens() {
   try {
     const response = await fetch(chrome.runtime.getURL('script/tokens.json'));
@@ -14,7 +14,7 @@ async function loadTokens() {
   }
 }
 
-// 1️⃣ POPUP VERSION (commenté) - Charger les tokens depuis Chrome storage
+// 1️POPUP VERSION (commenté) - Charger les tokens depuis Chrome storage
 /*
 async function loadTokens() {
   return new Promise((resolve, reject) => {

@@ -1,4 +1,4 @@
-const CLIENT_ID = "30676";
+const CLIENT_ID = "31331";
 // const REDIRECT_URI = "http://localhost:3000/callback"; // For Test Server in Local
 const REDIRECT_URI = "https://anilist-api.tritounet.fr/callback"; // For Production
 

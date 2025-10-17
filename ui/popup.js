@@ -18,10 +18,27 @@ document.addEventListener("DOMContentLoaded", function () {
   checkTokenStatus();
 
   loginBtn.addEventListener("click", function () {
-    const authUrl = `https://anilist.co/api/v2/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code`;
+    // Récupérer l'ID de l'extension pour le passer à l'API
+    const extensionId = browser.runtime.id;
+    const isFirefox = typeof InstallTrigger !== 'undefined';
+    const browserType = isFirefox ? 'firefox' : 'chrome';
 
-    // Ouvrir dans un nouvel onglet
-    browser.tabs.create({ url: authUrl });
+    // Encoder les infos de l'extension dans le state parameter (Base64 pour éviter les problèmes d'URL)
+    const stateData = JSON.stringify({
+      extensionId: extensionId,
+      browser: browserType
+    });
+    const state = btoa(stateData); // Base64 encode
+
+    const authUrl = `https://anilist.co/api/v2/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&state=${state}`;
+
+    // Ouvrir dans une nouvelle fenêtre (meilleure compatibilité Firefox)
+    browser.windows.create({
+      url: authUrl,
+      type: "popup",
+      width: 600,
+      height: 700
+    });
 
     showStatus(
       "Redirection vers AniList pour l'authentification...",

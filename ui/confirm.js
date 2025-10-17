@@ -1,8 +1,13 @@
+// Charger le polyfill pour la compatibilité
+if (typeof browser === 'undefined') {
+  window.browser = chrome;
+}
+
 // Récupérer les données depuis l'URL ou le storage
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Récupérer les données stockées
-        const result = await chrome.storage.local.get(['pendingUpdate']);
+        const result = await browser.storage.local.get(['pendingUpdate']);
         const data = result.pendingUpdate;
 
         if (data) {
@@ -19,7 +24,7 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
     console.log("🔥 Bouton confirmer cliqué - envoi du message");
     try {
         // Envoyer le message de confirmation au background script
-        await chrome.runtime.sendMessage({
+        await browser.runtime.sendMessage({
             type: "CONFIRM_UPDATE",
             action: "confirm"
         });
@@ -33,7 +38,7 @@ document.getElementById('confirmBtn').addEventListener('click', async () => {
 // Gestion du bouton Annuler
 document.getElementById('cancelBtn').addEventListener('click', () => {
     // Envoyer le message d'annulation au background script
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
         type: "CONFIRM_UPDATE",
         action: "cancel"
     });

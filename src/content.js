@@ -1,3 +1,8 @@
+// Charger le polyfill pour la compatibilité
+if (typeof browser === 'undefined') {
+  window.browser = chrome;
+}
+
 // Cache pour éviter de mettre à jour plusieurs fois le même épisode d'un anime
 let lastSent = { title: null, episode: null };
 
@@ -17,7 +22,7 @@ function extractAndSend() {
     console.log(episode);
 
     lastSent = { title, episode };
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
       type: "PAGE_INFO",
       animeTitle: title,
       episode: episode
@@ -42,7 +47,7 @@ function extractAndSend() {
     }
 
     lastSent = { title: seriesTitle, episode };
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
       type: "PAGE_INFO",
       animeTitle: seriesTitle,
       episode: episode

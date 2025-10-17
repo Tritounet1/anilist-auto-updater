@@ -1,10 +1,12 @@
+import "./browser-polyfill.js";
+
 const API_URL = "https://graphql.anilist.co";
 
-// Charger les tokens depuis Chrome storage (auth-success)
+// Charger les tokens depuis browser storage (auth-success)
 async function loadTokens() {
   return new Promise((resolve, reject) => {
-    chrome.storage.local.get(["anilist_access_token"], (result) => {
-      if (chrome.runtime.lastError) {
+    browser.storage.local.get(["anilist_access_token"], (result) => {
+      if (browser.runtime.lastError) {
         reject(new Error("❌ Erreur lors du chargement des tokens"));
       } else if (!result.anilist_access_token) {
         reject(

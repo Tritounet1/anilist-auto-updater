@@ -1,3 +1,8 @@
+// Charger le polyfill pour la compatibilité
+if (typeof browser === 'undefined') {
+  window.browser = chrome;
+}
+
 // Valeurs par défaut des paramètres
 const DEFAULT_SETTINGS = {
     autoUpdate: false,
@@ -13,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Charger les paramètres depuis le storage
 async function loadSettings() {
     try {
-        const result = await chrome.storage.sync.get(DEFAULT_SETTINGS);
+        const result = await browser.storage.sync.get(DEFAULT_SETTINGS);
 
         // Mettre à jour l'interface
         updateToggle('autoUpdateToggle', 'autoUpdateLabel', result.autoUpdate, 'Activé', 'Désactivé');
@@ -66,7 +71,7 @@ function initializeToggles() {
 // Sauvegarder un paramètre
 async function saveSetting(key, value) {
     try {
-        await chrome.storage.sync.set({ [key]: value });
+        await browser.storage.sync.set({ [key]: value });
         showStatus('Paramètres sauvegardés !', 'success');
     } catch (error) {
         console.error('Erreur lors de la sauvegarde:', error);

@@ -15,9 +15,16 @@
     "https://*.crunchyroll.com/*",
     "https://v6.voiranime.com/*"
   ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "anilist-updater@tritounet.fr",
+      "strict_min_version": "109.0"
+    }
+  },
   "background": {
     "service_worker": "src/background.js",
-    "type": "module"
+    "type": "module",
+    "scripts": ["src/background.js"]
   },
   "web_accessible_resources": [
     {

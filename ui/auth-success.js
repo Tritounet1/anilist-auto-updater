@@ -1,3 +1,8 @@
+// Charger le polyfill pour la compatibilité
+if (typeof browser === 'undefined') {
+  window.browser = chrome;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const statusDiv = document.getElementById("status");
   const closeBtn = document.getElementById("closeBtn");
@@ -20,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function saveToken(token) {
   try {
-    // Sauvegarder dans chrome.storage
-    await chrome.storage.local.set({
+    // Sauvegarder dans browser.storage
+    await browser.storage.local.set({
       anilist_access_token: token,
       auth_date: new Date().toISOString(),
     });

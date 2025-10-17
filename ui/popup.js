@@ -1,3 +1,8 @@
+// Charger le polyfill pour la compatibilité
+if (typeof browser === 'undefined') {
+  window.browser = chrome;
+}
+
 const CLIENT_ID = "31331";
 // const REDIRECT_URI = "http://localhost:3000/callback"; // For Test Server in Local
 const REDIRECT_URI = "https://anilist-api.tritounet.fr/callback"; // For Production
@@ -15,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
   loginBtn.addEventListener("click", function () {
     const authUrl = `https://anilist.co/api/v2/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code`;
 
-    // Ouvrir dans un nouvel onglet au lieu d'utiliser chrome.identity
-    chrome.tabs.create({ url: authUrl });
+    // Ouvrir dans un nouvel onglet
+    browser.tabs.create({ url: authUrl });
 
     showStatus(
       "Redirection vers AniList pour l'authentification...",
@@ -25,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   logoutBtn.addEventListener("click", function () {
-    chrome.storage.local.remove(
+    browser.storage.local.remove(
       ["anilist_access_token", "auth_date"],
       function () {
         showStatus("Déconnecté avec succès", "success");
@@ -35,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   testBtn.addEventListener("click", function () {
-    chrome.storage.local.get(["anilist_access_token"], function (result) {
+    browser.storage.local.get(["anilist_access_token"], function (result) {
       if (!result.anilist_access_token) {
         showStatus("Aucun token trouvé. Connectez-vous d'abord.", "error");
         return;
@@ -89,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function checkTokenStatus() {
-    chrome.storage.local.get(
+    browser.storage.local.get(
       ["anilist_access_token", "auth_date"],
       function (result) {
         if (result.anilist_access_token) {

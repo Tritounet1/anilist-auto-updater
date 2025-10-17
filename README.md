@@ -13,9 +13,11 @@ Extension Chrome qui met à jour automatiquement liste Anilist avec les animés 
 ## Installation
 
 ### 1. Télécharger l'extension
+
 Clonez ou téléchargez ce repository sur votre ordinateur.
 
 ### 2. Installer sur Chrome
+
 1. Ouvrez Chrome et allez dans `chrome://extensions/`
 2. Activez le **"Mode développeur"** (toggle en haut à droite)
 3. Cliquez sur **"Charger l'extension non empaquetée"** (ou **"Load unpacked"**)
@@ -23,8 +25,10 @@ Clonez ou téléchargez ce repository sur votre ordinateur.
 5. L'extension apparaît dans votre liste d'extensions apèrs quelque instants
 
 ### 3. Configuration des tokens Anilist
+
 1. Placez vos tokens d'authentification Anilist dans le fichier `script/tokens.json`
 2. Format requis :
+
 ```json
 {
   "token_type": "Bearer",
@@ -37,17 +41,20 @@ Clonez ou téléchargez ce repository sur votre ordinateur.
 ## Configuration
 
 ### Accéder aux options
+
 - **Méthode 1** : Clic droit sur l'icône de l'extension → "Options"
 - **Méthode 2** : Aller dans `chrome://extensions/` → Détails de l'extension → "Options d'extension"
 
 ### Options disponibles
 
 #### Mise à jour automatique
+
 - **Activé** : Met à jour Anilist automatiquement sans demander confirmation
-- **Désactivé** *(par défaut)* : Affiche une popup pour confirmer chaque mise à jour
+- **Désactivé** _(par défaut)_ : Affiche une popup pour confirmer chaque mise à jour
 
 #### Notifications
-- **Activé** *(par défaut)* : Affiche des notifications de succès/erreur
+
+- **Activé** _(par défaut)_ : Affiche des notifications de succès/erreur
 - **Désactivé** : Fonctionnement silencieux
 
 ## Utilisation
@@ -91,6 +98,7 @@ Clonez ou téléchargez ce repository sur votre ordinateur.
 ## Permissions requises
 
 L'extension demande les permissions suivantes :
+
 - `tabs` : Accès aux onglets pour détecter les pages visitées
 - `storage` : Sauvegarde des paramètres et données temporaires
 - `webNavigation` : Détection de navigation sur les sites supportés
@@ -99,9 +107,9 @@ L'extension demande les permissions suivantes :
 
 ## Roadmap
 
+- [ ] Rajouter une vérification si on modifie un anime déjà vue et si on baisse le compteur d'épisodes (on annule)
 - [ ] Modifier les commentaires dans le code (les faires en anglais + les améliorés et en rajouter)
 - [ ] Modifié l'icon de l'extension (et la mettre partout pour tout les emplacements d'icones, exemple : dans la liste des extensions)
 - [ ] Interface d'authentification Anilist intégrée (Enlever le dossir script quand la page d'authentifcation est intégrer)
 - [ ] Statistiques de visionnage (avoir directement dans les options de l'extension les infos de son compte anylist)
 - [ ] Rendre l'extension compatible firefox
-- [ ] Support de sites additionnels (MyAnimeList, etc.)

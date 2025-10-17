@@ -21,7 +21,12 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["script/tokens.json", "ui/confirm.html", "ui/confirm.js"],
+      "resources": [
+        "ui/confirm.html",
+        "ui/confirm.js",
+        "ui/auth-success.html",
+        "ui/auth-success.js"
+      ],
       "matches": ["<all_urls>"]
     }
   ],

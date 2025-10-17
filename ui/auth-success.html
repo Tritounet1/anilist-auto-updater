@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification réussie - Anilist Auto Updater</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .success-icon {
+            background: #4CAF50;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+        }
+        
+        h1 {
+            color: #333;
+            margin: 0 0 10px;
+            font-size: 24px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .status {
+            padding: 12px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .status.success {
+            background: #e8f5e8;
+            color: #2e7d2e;
+            border: 1px solid #4CAF50;
+        }
+        
+        .status.error {
+            background: #ffeaea;
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+        
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .close-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .close-btn:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✓</div>
+        <h1>Authentification réussie !</h1>
+        <p class="subtitle">Votre compte AniList a été connecté avec succès à l'extension.</p>
+        
+        <div id="status" class="status">
+            <div class="loader"></div>
+            <div style="margin-top: 10px;">Sauvegarde du token en cours...</div>
+        </div>
+        
+        <button id="closeBtn" class="close-btn" style="display: none;" onclick="window.close()">
+            Fermer cette page
+        </button>
+    </div>
+    
+    <script src="auth-success.js"></script>
+</body>
+</html>

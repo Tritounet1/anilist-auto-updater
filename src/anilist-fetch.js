@@ -1,33 +1,40 @@
 const API_URL = "https://graphql.anilist.co";
 
-// 1️Charger les tokens depuis le fichier tokens.json
+// Charger les tokens depuis Chrome storage (auth-success)
+async function loadTokens() {
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(["anilist_access_token"], (result) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error("❌ Erreur lors du chargement des tokens"));
+      } else if (!result.anilist_access_token) {
+        reject(
+          new Error(
+            "❌ Token d'accès introuvable. Connectez-vous d'abord via l'extension !",
+          ),
+        );
+      } else {
+        resolve({ access_token: result.anilist_access_token });
+      }
+    });
+  });
+}
+
+// ANCIENNE VERSION - Charger les tokens depuis un fichier tokens.json
+/*
 async function loadTokens() {
   try {
-    const response = await fetch(chrome.runtime.getURL('script/tokens.json'));
+    const response = await fetch(chrome.runtime.getURL("tokens.json"));
     const tokens = await response.json();
     if (!tokens.access_token) {
       throw new Error("❌ Token d'accès introuvable dans tokens.json");
     }
     return tokens;
   } catch (error) {
-    throw new Error("❌ Erreur lors du chargement des tokens depuis tokens.json: " + error.message);
+    throw new Error(
+      "❌ Erreur lors du chargement des tokens depuis tokens.json: " +
+        error.message,
+    );
   }
-}
-
-// 1️POPUP VERSION (commenté) - Charger les tokens depuis Chrome storage
-/*
-async function loadTokens() {
-  return new Promise((resolve, reject) => {
-    chrome.storage.local.get(['access_token'], (result) => {
-      if (chrome.runtime.lastError) {
-        reject(new Error("❌ Erreur lors du chargement des tokens"));
-      } else if (!result.access_token) {
-        reject(new Error("❌ Token d'accès introuvable. Connectez-vous d'abord !"));
-      } else {
-        resolve({ access_token: result.access_token });
-      }
-    });
-  });
 }
 */
 
@@ -35,12 +42,12 @@ async function graphqlRequest(query, variables = {}) {
   const tokens = await loadTokens();
 
   const res = await fetch(API_URL, {
-    method: 'POST',
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${tokens.access_token}`,
     },
-    body: JSON.stringify({ query, variables })
+    body: JSON.stringify({ query, variables }),
   });
 
   const result = await res.json();
@@ -141,4 +148,3 @@ export async function updateAnimeProgress(mediaId, progress) {
   const data = await graphqlRequest(mutation, { mediaId, progress });
   return data.SaveMediaListEntry;
 }
-

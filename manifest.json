@@ -12,6 +12,8 @@
     "identity"
   ],
   "host_permissions": [
+    "https://anilist.co/*",
+    "https://anilist-api.tritounet.fr/*",
     "https://*.crunchyroll.com/*",
     "https://v6.voiranime.com/*"
   ],

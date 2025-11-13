@@ -1,5 +1,5 @@
 // Charger le polyfill pour la compatibilité
-if (typeof browser === 'undefined') {
+if (typeof browser === "undefined") {
   window.browser = chrome;
 }
 
@@ -17,16 +17,51 @@ document.addEventListener("DOMContentLoaded", function () {
   // Vérifier si on a déjà un token au chargement
   checkTokenStatus();
 
+  loginBtn.addEventListener("click", async () => {
+    const extensionId = browser.runtime.id;
+    const isFirefox = typeof InstallTrigger !== "undefined";
+    const browserType = isFirefox ? "firefox" : "chrome";
+
+    const stateData = JSON.stringify({ extensionId, browser: browserType });
+    const state = btoa(stateData);
+
+    const authUrl = `https://anilist.co/api/v2/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=code&state=${state}`;
+
+    try {
+      const redirectUrl = await browser.identity.launchWebAuthFlow({
+        url: authUrl,
+        interactive: true,
+      });
+
+      // Ici, redirectUrl contiendra ton redirect_uri avec ?code=...&state=...
+      const urlParams = new URL(redirectUrl).searchParams;
+      const code = urlParams.get("code");
+
+      if (!code) {
+        showStatus("Erreur lors de la récupération du code OAuth", "error");
+        return;
+      }
+
+      // Tu peux ensuite envoyer `code` à ton API pour obtenir ton token final
+      showStatus("✅ Authentification réussie !", "success");
+      console.log("Code récupéré :", code);
+    } catch (err) {
+      console.error("Erreur OAuth :", err);
+      showStatus("❌ Erreur pendant l'authentification", "error");
+    }
+  });
+
+  /*
   loginBtn.addEventListener("click", function () {
     // Récupérer l'ID de l'extension pour le passer à l'API
     const extensionId = browser.runtime.id;
-    const isFirefox = typeof InstallTrigger !== 'undefined';
-    const browserType = isFirefox ? 'firefox' : 'chrome';
+    const isFirefox = typeof InstallTrigger !== "undefined";
+    const browserType = isFirefox ? "firefox" : "chrome";
 
     // Encoder les infos de l'extension dans le state parameter (Base64 pour éviter les problèmes d'URL)
     const stateData = JSON.stringify({
       extensionId: extensionId,
-      browser: browserType
+      browser: browserType,
     });
     const state = btoa(stateData); // Base64 encode
 
@@ -37,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
       url: authUrl,
       type: "popup",
       width: 600,
-      height: 700
+      height: 700,
     });
 
     showStatus(
@@ -45,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "success",
     );
   });
+  */
 
   logoutBtn.addEventListener("click", function () {
     browser.storage.local.remove(
